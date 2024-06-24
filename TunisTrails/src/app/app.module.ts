@@ -24,6 +24,7 @@ import { UserEventsComponent } from './user-events/user-events.component';
 import { UserHistoryComponent } from './user-history/user-history.component';
 import { CreateEventComponent } from './create-event/create-event.component';
 import { ProfilComponent } from './profil/profil.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import { ProfilComponent } from './profil/profil.component';
     UserEventsComponent,
     UserHistoryComponent,
     CreateEventComponent,
-    ProfilComponent
+    ProfilComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
