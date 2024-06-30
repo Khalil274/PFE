@@ -25,6 +25,8 @@ import { UserHistoryComponent } from './user-history/user-history.component';
 import { CreateEventComponent } from './create-event/create-event.component';
 import { ProfilComponent } from './profil/profil.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { ListUtilisateurComponent } from './list-utilisateur/list-utilisateur.component';
+import { ReservationComponent } from './reservation/reservation.component';
 
 
 @NgModule({
@@ -46,8 +48,10 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     UserHistoryComponent,
     CreateEventComponent,
     ProfilComponent,
-    DashboardComponent
-  ],
+    DashboardComponent,
+    ListUtilisateurComponent,
+    ReservationComponent,
+],
   imports: [
     BrowserModule,
     AppRoutingModule,

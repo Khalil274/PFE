@@ -1,92 +1,115 @@
-<!-- signup.component.html -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-<!-- Section: Design Block -->
-<section class="">
-  <!-- Jumbotron -->
-  <div class="px-4 py-5 px-md-5 text-center text-lg-start" style="background-color: hsl(0, 0%, 96%)">
-    <div class="container">
-      <div class="row gx-lg-5 align-items-center">
-        <div class="col-lg-6 mb-5 mb-lg-0">
-          <h1 class="my-5 display-3 fw-bold ls-tight">
-            The best offer <br />
-            <span class="text-primary">for your business</span>
-          </h1>
-        </div>
-
-        <div class="col-lg-6 mb-5 mb-lg-0">
-          <div class="card">
+<div class="area"></div>
+<nav class="main-menu">
+    <ul>
+        <li>
+            <a routerLink="/dashboard">
+                <i class="fa fa-calendar-alt fa-2x"></i>
+                <span class="nav-text">
+                    Events List
+                </span>
+            </a>
+        </li>
+        <li>
+            <a href="agency-signin">
+                <i class="fa fa-user-plus fa-2x"></i>
+                <span class="nav-text">
+                    Create Account
+                </span>
+            </a>
+        </li>
+        <li>
+            <a routerLink="/list-utilisateur">
+                <i class="fa fa-user fa-2x"></i>
+                <span class="nav-text">
+                    Liste utilisateur
+                </span>
+            </a>
+        </li>
+    </ul>
+    <ul class="logout">
+        <li>
+            <a href="Home">
+                <i class="fa fa-power-off fa-2x"></i>
+                <span class="nav-text">
+                    Logout
+                </span>
+            </a>
+        </li>
+    </ul>
+</nav>
+<section class="center-form">
+    <div class="col-lg-6 mb-5 mb-lg-0">
+        <div class="form-card">
             <div class="card-body py-5 px-md-5">
-              <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
-                <!-- 2 column grid layout with text inputs for the first and last names -->
-                <div class="row">
-                  <div class="col-md-6 mb-4">
-                    <div data-mdb-input-init class="form-outline">
-                      <input type="text" id="form3Example1" class="form-control" formControlName="name" required/>
-                      <label class="form-label" for="form3Example1">Full name</label>
+                <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+                    <h2>Créer Compte Agence</h2>
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <div data-mdb-input-init class="form-outline">
+                                <input type="text" id="form3Example1" class="form-control" formControlName="name"
+                                    required />
+                                <label class="form-label" for="form3Example1">Full name</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div data-mdb-input-init class="form-outline">
+                                <input type="number" id="form3Example2" class="form-control" formControlName="phone"
+                                    required />
+                                <label class="form-label" for="form3Example2">Phone</label>
+                            </div>
+                        </div>
                     </div>
-                  </div>
-                  <div class="col-md-6 mb-4">
-                    <div data-mdb-input-init class="form-outline">
-                      <input type="number" id="form3Example2" class="form-control" formControlName="phone" required/>
-                      <label class="form-label" for="form3Example2">Phone</label>
-  
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <div data-mdb-input-init class="form-outline">
+                                <input type="text" id="form3Example3" class="form-control" formControlName="address"
+                                    required />
+                                <label class="form-label" for="form3Example3">Address</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div data-mdb-input-init class="form-outline">
+                                <input type="email" id="form3Example4" class="form-control" formControlName="email"
+                                    required />
+                                <label class="form-label" for="form3Example4">Email</label>
+                                <div *ngIf="signupForm.get('email')?.invalid && (signupForm.get('email')?.dirty || signupForm.get('email')?.touched)">
+                                    <small class="text-danger" *ngIf="signupForm.get('email')?.errors?.['required']">Email is required.</small>
+                                    <small class="text-danger" *ngIf="signupForm.get('email')?.errors?.['email']">Invalid email format.</small>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                  </div>
-                </div>
-
-                <!-- Email input -->
-                <div class="row">
-                  <div class="col-md-6 mb-4">
-                    <div data-mdb-input-init class="form-outline">
-                      <input type="text" id="form3Example3" class="form-control" formControlName="address" required/>
-                      <label class="form-label" for="form3Example3">Address</label>
+                    <div data-mdb-input-init class="form-outline mb-4">
+                        <input type="password" id="form3Example5" class="form-control" formControlName="password"
+                            required />
+                        <label class="form-label" for="form3Example5">Password</label>
+                        <div *ngIf="signupForm.get('password')?.invalid && (signupForm.get('password')?.dirty || signupForm.get('password')?.touched)">
+                            <small class="text-danger" *ngIf="signupForm.get('password')?.errors?.['required']">Password is required.</small>
+                            <small class="text-danger" *ngIf="signupForm.get('password')?.errors?.['minlength']">Password must be at least 6 characters.</small>
+                        </div>
                     </div>
-                  </div>
-                  <div class="col-md-6 mb-4">
-                    <div data-mdb-input-init class="form-outline">
-                      <input type="email" id="form3Example4" class="form-control" formControlName="email" required/>
-                      <label class="form-label" for="form3Example4">Email</label>
+                    <div data-mdb-input-init class="form-outline mb-4">
+                        <input type="password" id="confirmPassword" class="form-control" formControlName="confirmPassword"
+                            required />
+                        <label class="form-label" for="confirmPassword">Confirm Password</label>
+                        <div *ngIf="signupForm.get('confirmPassword')?.invalid && (signupForm.get('confirmPassword')?.dirty || signupForm.get('confirmPassword')?.touched)">
+                            <small class="text-danger" *ngIf="signupForm.get('confirmPassword')?.errors?.['required']">Confirm Password is required.</small>
+                            <small class="text-danger" *ngIf="signupForm.get('confirmPassword')?.errors?.['passwordMismatch']">Passwords do not match.</small>
+                        </div>
                     </div>
-                  </div>
-                </div>
-
-                <!-- Password input -->
-                <div data-mdb-input-init class="form-outline mb-4">
-                  <input type="password" id="form3Example5" class="form-control" formControlName="password" required/>
-                  <label class="form-label" for="form3Example5">Password</label>
-                </div>
-
-                <!-- Submit button -->
-                <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block mb-4">
-                  Sign up
-                </button>
-
-                <!-- Register buttons -->
-                <div class="text-center">
-                  <p>or sign up with:</p>
-                  <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-link btn-floating mx-1">
-                    <i class="fab fa-facebook-f"></i>
-                  </button>
-
-                  <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-link btn-floating mx-1">
-                    <i class="fab fa-google"></i>
-                  </button>
-
-                  <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-link btn-floating mx-1">
-                    <i class="fab fa-twitter"></i>
-                  </button>
-                  <div>
-                    <p class="mb-2">You have an account? <a class="text-dark-50 fw-bold" routerLink="/login">Log In</a></p>
-                  </div>
-                </div>
-              </form>
+                    <button type="submit" data-mdb-button-init data-mdb-ripple-init
+                        class="btn btn-primary btn-block mb-4">
+                        Create
+                    </button>
+                </form>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
-  <!-- Jumbotron -->
 </section>
-<!-- Section: Design Block -->
+
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    </script>

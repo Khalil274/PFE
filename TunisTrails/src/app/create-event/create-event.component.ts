@@ -1,7 +1,5 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { EventService } from '../Services/Event.service';
-import { Event } from '../Classes/Event' ;
+import { Component, OnInit } from '@angular/core';
+
 
 @Component({
   selector: 'app-create-event',
@@ -9,5 +7,6 @@ import { Event } from '../Classes/Event' ;
   styleUrls: ['./create-event.component.css']
 })
 export class CreateEventComponent {
-
+  
 }
+

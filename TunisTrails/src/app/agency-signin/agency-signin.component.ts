@@ -12,7 +12,6 @@ import { Role } from '../Classes/Role.enum';
 })
 export class AgencySigninComponent {
   signupForm: FormGroup;
-
   user: User = {
     id: 0,
     name: '',
@@ -66,6 +65,14 @@ export class AgencySigninComponent {
       }
     );
   }
-
+  passwordMatchValidator(formGroup: FormGroup) {
+    const password = formGroup.get('password');
+    const confirmPassword = formGroup.get('confirmPassword');
+    if (password && confirmPassword && password.value !== confirmPassword.value) {
+      confirmPassword.setErrors({ passwordMismatch: true });
+    } else {
+      confirmPassword?.setErrors(null);  // Use non-null assertion operator
+    }
+  }
 }
 

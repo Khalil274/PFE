@@ -17,6 +17,9 @@ import { UserEventsComponent } from './user-events/user-events.component';
 import { UserHistoryComponent } from './user-history/user-history.component';
 import { CreateEventComponent } from './create-event/create-event.component';
 import { ProfilComponent } from './profil/profil.component';
+import { DashboardComponent } from './dashboard/dashboard.component'; // Import the DashboardComponent
+import { ListUtilisateurComponent } from './list-utilisateur/list-utilisateur.component';
+import { ReservationComponent } from './reservation/reservation.component';
 
 
 const routes: Routes = [
@@ -37,6 +40,10 @@ const routes: Routes = [
   { path : 'user-history', component: UserHistoryComponent }, //Route for displaying UserHistoryComponent
   { path : 'create-event', component: CreateEventComponent }, //Route for displaying CreateEventComponent
   { path : 'profil', component: ProfilComponent }, //Route for displaying CreateEventComponent
+  { path: 'dashboard', component: DashboardComponent }, // Route for displaying DashboardComponent
+  { path: 'list-utilisateur', component: ListUtilisateurComponent }, // Route for displaying ListUtilisateurComponent
+  { path: 'reservation', component: ReservationComponent }, // Route for displaying ListUtilisateurComponent
+  { path: '', redirectTo: '/login', pathMatch: 'full' }, // Default route
   { path: '**', redirectTo: '/home' } // Redirect to home if route not found
 ];
 

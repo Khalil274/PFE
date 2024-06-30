@@ -1,18 +1,31 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { User } from '../Classes/User';  // Adjust the path as necessary
+
+export interface AuthenticationRequest {
+  email: string;
+  password: string;
+}
+
+export interface AuthenticationResponse {
+  jwt: string;
+  name: string;
+  role: string;
+  id: string;
+  mfaEnabled: boolean;
+  token: string;
+}
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
-  private apiUrl = 'http://localhost:8081/auth'; // Replace with your actual backend URL
+export class LoginService {
+  private apiUrl = 'http://localhost:8081/auth/login'; // Replace with your actual backend URL
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  login(credentials: { email: string, password: string }): Observable<User> {
-    return this.http.post<User>(`${this.apiUrl}/login`, credentials);
+  login(email: string, password: string): Observable<AuthenticationResponse> {
+    const request: AuthenticationRequest = { email, password };
+    return this.http.post<AuthenticationResponse>(this.apiUrl, request);
   }
 }
-

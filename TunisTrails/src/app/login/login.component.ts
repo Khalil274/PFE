@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { LoginService } from '../Services/Login.service';
 import { Router } from '@angular/router';
-import { UserService } from '../Services/Login.service'; // Adjust the path as necessary
 
 @Component({
   selector: 'app-login',
@@ -8,30 +9,38 @@ import { UserService } from '../Services/Login.service'; // Adjust the path as n
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  email: string = '';
-  password: string = '';
+  loginForm: FormGroup;
   errorMessage: string = '';
-  successMessage: string = '';
 
-  constructor(private userService: UserService, private router: Router) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private loginService: LoginService,
+    private router: Router
+  ) {
+    this.loginForm = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', Validators.required]
+    });
+  }
 
-  login() {
-    if (!this.email || !this.password) {
-      this.errorMessage = 'Please fill in all required fields.';
-      return;
+  onSubmit(): void {
+    if (this.loginForm.valid) {
+      const { email, password } = this.loginForm.value;
+      
+      this.loginService.login(email, password).subscribe(
+        (authResponse) => {
+          console.log('Login successful!', authResponse);
+          sessionStorage.setItem('token', authResponse.jwt);
+          sessionStorage.setItem('name', authResponse.name);
+          sessionStorage.setItem('role', authResponse.role);
+          
+          this.router.navigate(['/user-events']); // Navigate to '/user-events' upon successful login
+        },
+        (error) => {
+          console.error('Login error:', error);
+          this.errorMessage = 'Invalid credentials. Please try again.';
+        }
+      );
     }
-
-    this.userService.login({ email: this.email, password: this.password }).subscribe(
-      response => {
-        console.log('Login successful', response);
-        this.successMessage = 'Login successful!';
-        // Redirect to userblogs page upon successful login
-        this.router.navigate(['/user-events']);
-      },
-      error => {
-        console.error('Login failed', error);
-        this.errorMessage = 'Invalid email or password.';
-      }
-    );
   }
 }
